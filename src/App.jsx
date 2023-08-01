@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import * as d3 from "d3";
 import axios from "axios";
-
 import "./App.css";
 
 function App() {
@@ -26,7 +25,31 @@ function App() {
   treemap(root);
 
   // Define different fill colors
-  const colors = d3.scaleOrdinal(d3.schemeCategory10);
+  const blueShades = [
+    "#f7fbff",
+    "#deebf7",
+    "#c6dbef",
+    "#9ecae1",
+    "#6baed6",
+    "#4292c6",
+    "#2171b5",
+    "#08519c",
+    "#08306b",
+  ].reverse();
+
+  const greenShades = [
+    "#f7fcf5",
+    "#e5f5e0",
+    "#c7e9c0",
+    "#a1d99b",
+    "#74c476",
+    "#41ab5d",
+    "#238b45",
+    "#006d2c",
+    "#00441b",
+  ].reverse();
+
+  const colors = d3.scaleOrdinal([...blueShades, ...greenShades]);
 
   const handleMouseEnter = (event, leaf) => {
     const tooltip = document.getElementById("tooltip");
