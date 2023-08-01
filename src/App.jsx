@@ -28,6 +28,24 @@ function App() {
   // Define different fill colors
   const colors = d3.scaleOrdinal(d3.schemeCategory10);
 
+  const handleMouseEnter = (event, leaf) => {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.innerHTML = `
+      <p>${leaf.data.name}</p>
+      <p>Category: ${leaf.data.category}</p>
+      <p>Value: ${leaf.data.value}</p>
+    `;
+    tooltip.style.display = "block";
+    tooltip.style.left = event.pageX + "px";
+    tooltip.style.top = event.pageY + "px";
+    tooltip.setAttribute("data-value", leaf.data.value);
+  };
+
+  const handleMouseLeave = () => {
+    const tooltip = document.getElementById("tooltip");
+    tooltip.style.display = "none";
+  };
+
   return (
     <>
       <div id="title">Treemap Diagram Title</div>
@@ -37,12 +55,8 @@ function App() {
           <g
             key={`group-${i}`}
             transform={`translate(${leaf.x0},${leaf.y0})`}
-            onMouseEnter={() => {
-              // Handle tooltip display here
-            }}
-            onMouseLeave={() => {
-              // Handle tooltip hide here
-            }}
+            onMouseEnter={(e) => handleMouseEnter(e, leaf)}
+            onMouseLeave={handleMouseLeave}
           >
             <rect
               className="tile"
@@ -51,7 +65,7 @@ function App() {
               data-value={leaf.data.value}
               width={leaf.x1 - leaf.x0}
               height={leaf.y1 - leaf.y0}
-              fill={colors(i)}
+              fill={colors(leaf.parent.data.children.indexOf(leaf.data))} // Use different fill colors based on parent index
             />
           </g>
         ))}
