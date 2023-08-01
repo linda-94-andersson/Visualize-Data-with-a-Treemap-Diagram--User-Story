@@ -26,10 +26,6 @@ function App() {
 
   // Define different fill colors
   const blueShades = [
-    "#f7fbff",
-    "#deebf7",
-    "#c6dbef",
-    "#9ecae1",
     "#6baed6",
     "#4292c6",
     "#2171b5",
@@ -38,10 +34,6 @@ function App() {
   ].reverse();
 
   const greenShades = [
-    "#f7fcf5",
-    "#e5f5e0",
-    "#c7e9c0",
-    "#a1d99b",
     "#74c476",
     "#41ab5d",
     "#238b45",
@@ -49,7 +41,28 @@ function App() {
     "#00441b",
   ].reverse();
 
-  const colors = d3.scaleOrdinal([...blueShades, ...greenShades]);
+  const purpleShades = [
+    "#9e9ac8",
+    "#807dba",
+    "#6a51a3",
+    "#54278f",
+    "#3f007d",
+  ].reverse();
+
+  const grayShades = [
+    "#737373",
+    "#525252",
+    "#252525",
+    "#000000",
+  ].reverse();
+
+  // Combine the shades for the color scale
+  const colors = d3.scaleOrdinal([
+    ...blueShades,
+    ...greenShades,
+    ...purpleShades,
+    ...grayShades,
+  ]);
 
   const handleMouseEnter = (event, leaf) => {
     const tooltip = document.getElementById("tooltip");
