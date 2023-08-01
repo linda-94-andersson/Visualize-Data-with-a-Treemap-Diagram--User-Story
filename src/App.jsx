@@ -62,7 +62,7 @@ function App() {
   return (
     <>
       <div id="title">Treemap Diagram Title</div>
-      <div id="description">Description about the treemap</div>
+      <div id="description">Top 100 Most Pledged Kickstarter Campaigns Grouped By Category</div>
       <svg width="800" height="500">
         {root.leaves().map((leaf, i) => (
           <g
