@@ -93,16 +93,27 @@ function App() {
           </g>
         ))}
       </svg>
-      <div id="legend">
-        {/* Create the legend here with at least 2 different fill colors */}
+      <div
+        id="legend"
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+        }}
+      >
         {root.children.map((child, i) => (
-          <div key={`legend-item-${i}`} className="legend-item">
+          <rect key={`legend-item-${i}`} className="legend-item">
             <span
               className="legend-color"
-              style={{ background: colors(i) }}
+              style={{
+                backgroundColor: colors(i),
+                width: 10,
+                height: 10,
+                display: "block",
+              }}
             ></span>
             <span className="legend-label">{child.data.name}</span>
-          </div>
+          </rect>
         ))}
       </div>
       <div id="tooltip" />
