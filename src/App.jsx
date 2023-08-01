@@ -49,12 +49,7 @@ function App() {
     "#3f007d",
   ].reverse();
 
-  const grayShades = [
-    "#737373",
-    "#525252",
-    "#252525",
-    "#000000",
-  ].reverse();
+  const grayShades = ["#737373", "#525252", "#252525", "#000000"].reverse();
 
   // Combine the shades for the color scale
   const colors = d3.scaleOrdinal([
@@ -63,6 +58,12 @@ function App() {
     ...purpleShades,
     ...grayShades,
   ]);
+
+  // Create a separate scale for the legend
+  const legendColors = d3
+    .scaleOrdinal()
+    .domain(root.children.map((child) => child.data.name))
+    .range([...blueShades, ...greenShades, ...purpleShades, ...grayShades]);
 
   const handleMouseEnter = (event, leaf) => {
     const tooltip = document.getElementById("tooltip");
@@ -101,7 +102,7 @@ function App() {
               data-value={leaf.data.value}
               width={leaf.x1 - leaf.x0}
               height={leaf.y1 - leaf.y0}
-              fill={colors(leaf.parent.data.children.indexOf(leaf.data))} // Use different fill colors based on parent index
+              fill={legendColors(leaf.data.category)} // Use different fill colors based on the category
             />
           </g>
         ))}
@@ -119,7 +120,7 @@ function App() {
             <span
               className="legend-color"
               style={{
-                backgroundColor: colors(i),
+                backgroundColor: legendColors(child.data.name), // Use different background color based on the category
                 width: 10,
                 height: 10,
                 display: "block",
