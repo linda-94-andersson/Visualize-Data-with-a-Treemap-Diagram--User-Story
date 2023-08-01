@@ -51,14 +51,6 @@ function App() {
 
   const grayShades = ["#737373", "#525252", "#252525", "#000000"].reverse();
 
-  // Combine the shades for the color scale
-  const colors = d3.scaleOrdinal([
-    ...blueShades,
-    ...greenShades,
-    ...purpleShades,
-    ...grayShades,
-  ]);
-
   // Create a separate scale for the legend
   const legendColors = d3
     .scaleOrdinal()
