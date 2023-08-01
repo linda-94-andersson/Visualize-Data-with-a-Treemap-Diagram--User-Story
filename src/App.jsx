@@ -25,37 +25,21 @@ function App() {
   treemap(root);
 
   // Define different fill colors
-  const blueShades = [
-    "#6baed6",
-    "#4292c6",
-    "#2171b5",
-    "#08519c",
-    "#08306b",
-  ].reverse();
+  const blueShades = ["#4292c6", "#2171b5", "#08519c", "#08306b"].reverse();
 
-  const greenShades = [
-    "#74c476",
-    "#41ab5d",
-    "#238b45",
-    "#006d2c",
-    "#00441b",
-  ].reverse();
+  const greenShades = ["#41ab5d", "#238b45", "#006d2c", "#00441b"].reverse();
 
-  const purpleShades = [
-    "#9e9ac8",
-    "#807dba",
-    "#6a51a3",
-    "#54278f",
-    "#3f007d",
-  ].reverse();
+  const purpleShades = ["#807dba", "#6a51a3", "#54278f", "#3f007d"].reverse();
 
-  const grayShades = ["#737373", "#525252", "#252525", "#000000"].reverse();
+  const yellowShades = ["#fee391", "#fec44f", "#fe9929", "#ec7014"].reverse();
+
+  const orangeShades = ["#f16913", "#d94801", "#a63603", "#7f2704"].reverse();
 
   // Create a separate scale for the legend
   const legendColors = d3
     .scaleOrdinal()
     .domain(root.children.map((child) => child.data.name))
-    .range([...blueShades, ...greenShades, ...purpleShades, ...grayShades]);
+    .range([...blueShades, ...greenShades, ...purpleShades, ...yellowShades, ...orangeShades]);
 
   const handleMouseEnter = (event, leaf) => {
     const tooltip = document.getElementById("tooltip");
@@ -109,7 +93,7 @@ function App() {
       >
         {root.children.map((child, i) => (
           <div key={`legend-item-${i}`} className="legend-item">
-            <svg width="10" height="10">
+            <svg width="10" height="10" style={{ paddingLeft: 15, paddingRight: 5 }}>
               <rect
                 className="legend-item"
                 width="10"
